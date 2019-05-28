@@ -51,18 +51,18 @@ function useRestItemApi<T>(
   const defaultUrl = getFetchRecordUrl(url, id, innerOptions.loadInitData);
   const { data, isLoading, isError, updateData, doFetch } = useDataApi<T>(
     defaultUrl,
-    innerOptions.defaultData as T,
+    innerOptions.defaultData,
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getDataId = () => (data as any)[innerOptions.idPropertyName] as string;
+
   const reload = () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const dataId: string = (data as any)[innerOptions.idPropertyName];
-    doFetch(getFetchRecordUrl(url, dataId, innerOptions.loadInitData));
+    doFetch(getFetchRecordUrl(url, getDataId(), innerOptions.loadInitData));
   };
 
   const save = async (newData: T) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const dataId: string = (data as any)[innerOptions.idPropertyName];
+    const dataId = getDataId();
     let result: T;
     if (!dataId) {
       result = await http.post<T>(url, newData);
@@ -74,8 +74,7 @@ function useRestItemApi<T>(
   };
 
   const remove = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const dataId: string = (data as any)[innerOptions.idPropertyName];
+    const dataId = getDataId();
     if (dataId) {
       await http.delete(`${url}/${dataId}`);
       updateData(innerOptions.defaultData);

@@ -70,7 +70,7 @@ interface DataSource<T> {
   /**
    * 重新加载数据
    */
-  reload(): Promise<T>;
+  reload(): void;
 
   /**
    * 更新数据状态

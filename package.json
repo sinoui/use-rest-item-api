@@ -1,5 +1,5 @@
 {
-  "name": "use-rest-item-api",
+  "name": "@sinoui/use-rest-item-api",
   "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
@@ -46,13 +46,22 @@
   ],
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "@babel/runtime": "^7.4.5"
+    "@babel/runtime": "^7.4.5",
+    "@sinoui/http": "^0.2.1",
+    "@sinoui/use-data-api": "^0.2.2"
   },
   "devDependencies": {
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
+    "react": "^16.8.6",
     "ts-lib-tools": "^0.1.7",
     "typescript": "^3.4.5"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

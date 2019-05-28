@@ -1,31 +1,112 @@
-# use-rest-item-api
+# @sinoui/use-rest-item-api
 
-这是由[ts-lib-scripts](https://github.com/sinoui/ts-lib-scripts)创建的TypeScript库项目。
+与单条数据的 RESTful 风格的增删改查 API 交互的状态管理 React Hook。
 
-## 本地开发
+## 安装
 
-项目中有以下有用的命令。
+```shell
+yarn add @sinoui/use-rest-item-api
+```
 
-### `yarn start`
+或者：
 
-在开发和监听模式下启动项目。当代码发生变化时就会重新编译代码。它同时会实时地向你汇报项目中的代码错误。
+```shell
+npm i --save @sinoui/use-rest-item-api
+```
 
-### `yarn build`
+## 方法说明
 
-打包，并将打包文件放在`dist`文件夹中。使用 rollup 对代码做优化并打包成多种格式（`Common JS`，`UMD`和`ES Module`）。
+```ts
+import useRestItemApi from '@sinoui/use-rest-item-api';
 
-### `yarn lint`
+const dataSource = useRestItemApi('/users', '1');
 
-`yarn lint`会检查整个项目是否有代码错误、风格错误。
+console.log('加载中状态', dataSource.isLoading);
+console.log('加载失败状态', dataSource.isError);
+console.log('数据', dataSource.data);
 
-开启 vscode 的 eslint、prettier 插件，在使用 vscode 编码时，就会自动修正风格错误、提示语法错误。
+// 保存：save方法会根据数据中是否有id来判断调用后端的创建API还是更新API
+dataSource.save({
+  userName: '张三',
+  sex: 'female',
+});
 
-### `yarn format`
+// 删除
+dataSource.delete();
 
-`yarn format`可以自动调整整个项目的代码风格问题。
+// 只更新数据状态，而不向后端发送保存请求
+dataSource.updateData({
+  userName: '李四',
+});
+```
 
-### `yarn test`
+函数语法：
 
-`yarn test`以监听模式启动 jest，运行单元测试。
+```ts
+/**
+ * 返回值接口
+ */
+interface DataSource<T> {
+  /**
+   * 数据
+   */
+  data: T;
+  /**
+   * 是否加载中的状态
+   */
+  isLoading: boolean;
+  /**
+   * 是否加载错误的状态
+   */
+  isError: boolean;
+  /**
+   * 保存数据。将数据提交给后端的创建API或者更新API，成功后更新data状态。
+   */
+  save(newData: T): Promise<T>;
+  /**
+   * 删除数据。与后端的删除API交互。
+   */
+  delete(): Promise<void>;
+  /**
+   * 重新加载数据
+   */
+  reload(): Promise<T>;
 
-开启 vscode 的 jest 插件，会在文件变化时自动运行单元测试。
+  /**
+   * 更新数据状态
+   */
+  updateData: (newData: T) => void;
+}
+
+/**
+ * 配置接口
+ */
+interface Options<T> {
+  /**
+   * 默认数据
+   */
+  defaultData?: T;
+  /**
+   * 是否加载初始化数据。如果为`true`，且`id`为空时，会向后端发送一个`${baseUrl}/_init`的请求，获取初始化数据。默认为`false`。
+   */
+  loadInitData?: boolean;
+  /**
+   * 数据中唯一键属性名。默认为`id`。
+   */
+  idPropertyName?: string;
+}
+
+/**
+ * 与单条数据的 RESTful 风格的增删改查 API 交互的状态管理 hook。
+ *
+ * @param {string} url RESTful API的资源集合url，即基础url，如`/users`
+ * @param {string} [id] 需要加载数据的id。可以是`undefined`，这时可能表示的是用户刚打开创建表单。
+ * @param {Options} [options] 选项。
+ * @returns {DataSource}
+ */
+function useRestItemApi<T>(
+  url: string,
+  id?: string,
+  options?: Options<T>,
+): DataSource<T>;
+```

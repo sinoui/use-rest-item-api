@@ -1,6 +1,6 @@
 {
   "name": "@sinoui/use-rest-item-api",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "与单条数据的 RESTful 风格的增删改查 API 交互的状态管理 React Hook。",
   "main": "dist/index.js",

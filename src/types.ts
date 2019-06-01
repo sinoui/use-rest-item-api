@@ -30,7 +30,7 @@ export interface DataSource<T> {
   /**
    * 更新数据状态
    */
-  updateData: (newData: T) => void;
+  setData: (newData: T) => void;
 }
 
 /**

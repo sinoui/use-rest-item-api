@@ -35,7 +35,7 @@ dataSource.save({
 dataSource.delete();
 
 // 只更新数据状态，而不向后端发送保存请求
-dataSource.updateData({
+dataSource.setData({
   userName: '李四',
 });
 ```
@@ -75,7 +75,7 @@ interface DataSource<T> {
   /**
    * 更新数据状态
    */
-  updateData: (newData: T) => void;
+  setData: (newData: T) => void;
 }
 
 /**

@@ -49,7 +49,7 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/runtime": "^7.4.5",
     "@sinoui/http": "^0.2.2",
-    "@sinoui/use-data-api": "^0.3.2"
+    "@sinoui/use-data-api": "^0.4.0"
   },
   "devDependencies": {
     "husky": "^2.3.0",

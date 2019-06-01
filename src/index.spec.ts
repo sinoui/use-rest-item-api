@@ -27,24 +27,24 @@ it('加载数据', () => {
   expect(useDataApi).toHaveBeenCalledWith(undefined, initialData);
 });
 
-it('有isLoading, isError, updateData', () => {
+it('有isLoading, isError, setData', () => {
   const isLoading = true;
   const isError = false;
-  const updateData = jest.fn();
+  const setData = jest.fn();
   const doFetch = jest.fn();
 
   (useDataApi as jest.Mock).mockReturnValue({
     data: { id: '1' },
     isLoading,
     isError,
-    updateData,
+    setData,
     doFetch,
   });
   const dataSource = useRestItemApi('/users', '1');
 
   expect(dataSource.isLoading).toBe(isLoading);
   expect(dataSource.isError).toBe(isError);
-  expect(dataSource.updateData).toBe(updateData);
+  expect(dataSource.setData).toBe(setData);
 
   dataSource.reload();
 
@@ -69,10 +69,10 @@ it('创建数据', async () => {
     userName: '张三',
   };
   (http.post as jest.Mock).mockResolvedValue(response);
-  const updateData = jest.fn();
+  const setData = jest.fn();
   (useDataApi as jest.Mock).mockReturnValue({
     data: {},
-    updateData,
+    setData,
   });
 
   const { save } = useRestItemApi('/users', undefined);
@@ -80,7 +80,7 @@ it('创建数据', async () => {
   const result = await save(newData);
 
   expect(http.post).toHaveBeenCalledWith('/users', newData);
-  expect(updateData).toHaveBeenCalledWith(response);
+  expect(setData).toHaveBeenCalledWith(response);
   expect(result).toEqual(response);
 });
 
@@ -91,10 +91,10 @@ it('更新数据', async () => {
   };
   const data = { id: '1', userName: '张三' };
   (http.put as jest.Mock).mockResolvedValue(newData);
-  const updateData = jest.fn();
+  const setData = jest.fn();
   (useDataApi as jest.Mock).mockReturnValue({
     data,
-    updateData,
+    setData,
   });
 
   const { save } = useRestItemApi('/users', undefined);
@@ -102,17 +102,17 @@ it('更新数据', async () => {
   const result = await save(newData);
 
   expect(http.put).toHaveBeenCalledWith('/users/1', newData);
-  expect(updateData).toHaveBeenCalledWith(newData);
+  expect(setData).toHaveBeenCalledWith(newData);
   expect(result).toEqual(newData);
 });
 
 it('删除数据', async () => {
   const defaultData = { userName: '张三' };
   (http.delete as jest.Mock).mockResolvedValue(null);
-  const updateData = jest.fn();
+  const setData = jest.fn();
   (useDataApi as jest.Mock).mockReturnValue({
     data: { id: '1', userName: '张三' },
-    updateData,
+    setData,
   });
 
   const { delete: remove } = useRestItemApi('/users', undefined, {
@@ -122,7 +122,7 @@ it('删除数据', async () => {
   await remove();
 
   expect(http.delete).toHaveBeenCalledWith('/users/1');
-  expect(updateData).toHaveBeenCalledWith(defaultData);
+  expect(setData).toHaveBeenCalledWith(defaultData);
 });
 
 it('不存在的数据，不需要删除', async () => {

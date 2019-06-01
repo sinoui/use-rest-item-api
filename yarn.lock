@@ -937,10 +937,10 @@
     "@babel/runtime" "^7.4.4"
     axios "0.19.0"
 
-"@sinoui/use-data-api@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@sinoui/use-data-api/-/use-data-api-0.3.2.tgz#8168169b458d659ca6f17b7d4bc2874c4278d6d4"
-  integrity sha512-l2sxoT3I7hKj4oClBb1RiN0LzOorbdL9ooDwbuvPJH1RNt1LRsbCO7ncvb7EOdGJJHyYAAMn+DifAU7fT6n/SQ==
+"@sinoui/use-data-api@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@sinoui/use-data-api/-/use-data-api-0.4.0.tgz#b9ad3833f960893747c795ef10a8aebc773647e3"
+  integrity sha512-KUu1G6weS921guoeXRy61tG4KnTWfbvNIxrUe+zZMkNgbqTE/V6nQHO2yrVlYiLvQC1XCq4X88VZ+LLtHekO8g==
   dependencies:
     "@babel/polyfill" "^7.4.4"
     "@babel/runtime" "^7.4.5"

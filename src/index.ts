@@ -49,7 +49,7 @@ function useRestItemApi<T>(
     ...options,
   };
   const defaultUrl = getFetchRecordUrl(url, id, innerOptions.loadInitData);
-  const { data, isLoading, isError, updateData, doFetch } = useDataApi<T>(
+  const { data, isLoading, isError, setData, doFetch } = useDataApi<T>(
     defaultUrl,
     innerOptions.defaultData,
   );
@@ -69,7 +69,7 @@ function useRestItemApi<T>(
     } else {
       result = await http.put<T>(`${url}/${dataId}`, newData);
     }
-    updateData(result);
+    setData(result);
     return result;
   };
 
@@ -77,13 +77,13 @@ function useRestItemApi<T>(
     const dataId = getDataId();
     if (dataId) {
       await http.delete(`${url}/${dataId}`);
-      updateData(innerOptions.defaultData);
+      setData(innerOptions.defaultData);
     } else {
       throw new Error(`不存在的数据，不需要删除`);
     }
   };
 
-  return { data, isLoading, isError, updateData, reload, save, delete: remove };
+  return { data, isLoading, isError, setData, reload, save, delete: remove };
 }
 
 export default useRestItemApi;

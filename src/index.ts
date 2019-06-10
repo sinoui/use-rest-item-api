@@ -58,7 +58,13 @@ function useRestItemApi<T>(
   const getDataId = () => (data as any)[innerOptions.idPropertyName] as string;
 
   const reload = () => {
-    doFetch(getFetchRecordUrl(url, getDataId(), innerOptions.loadInitData));
+    doFetch(
+      getFetchRecordUrl(
+        url,
+        id !== undefined && id !== null ? id : getDataId(),
+        innerOptions.loadInitData,
+      ),
+    );
   };
 
   const save = async (newData: T) => {

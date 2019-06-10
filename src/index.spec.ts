@@ -136,3 +136,16 @@ it('不存在的数据，不需要删除', async () => {
 
   await expect(remove()).rejects.toThrow('不存在的数据，不需要删除');
 });
+
+it('加载失败后再重新加载', () => {
+  const doFetch = jest.fn();
+  (useDataApi as jest.Mock).mockReturnValue({
+    isError: true,
+    doFetch,
+  });
+
+  const dataSource = useRestItemApi('/users', '1');
+
+  dataSource.reload();
+  expect(doFetch).toHaveBeenCalledWith('/users/1');
+});

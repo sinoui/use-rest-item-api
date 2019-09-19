@@ -46,18 +46,18 @@
     "assets"
   ],
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
-    "@babel/runtime": "^7.4.5",
-    "@sinoui/http": "^0.2.2",
-    "@sinoui/use-data-api": "^0.4.0"
+    "@babel/polyfill": "^7.6.0",
+    "@babel/runtime": "^7.6.0",
+    "@sinoui/http": "^1.0.0",
+    "@sinoui/use-data-api": "^1.0.1"
   },
   "devDependencies": {
     "husky": "^2.3.0",
-    "lint-staged": "^8.1.7",
-    "prettier": "^1.17.1",
-    "react": "^16.8.6",
-    "ts-lib-tools": "^0.1.7",
-    "typescript": "^3.4.5"
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "react": "^16.9.0",
+    "ts-lib-tools": "^0.4.7",
+    "typescript": "^3.6.3"
   },
   "peerDependencies": {
     "react": "^16.8.0"

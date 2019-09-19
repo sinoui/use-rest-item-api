@@ -4,9 +4,15 @@
   "license": "MIT",
   "description": "与单条数据的 RESTful 风格的增删改查 API 交互的状态管理 React Hook。",
   "main": "dist/index.js",
-  "umd:main": "dist/use-rest-item-api.umd.production.js",
-  "module": "dist/use-rest-item-api.es.production.js",
+  "module": "dist/sinoui-use-rest-item-api.esm.js",
   "typings": "dist/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/sinoui/use-rest-item-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinoui/use-rest-item-api.git"
+  },
   "scripts": {
     "start": "ts-lib-tools watch",
     "test": "ts-lib-tools test",

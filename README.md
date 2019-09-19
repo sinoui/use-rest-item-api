@@ -1,5 +1,8 @@
 # @sinoui/use-rest-item-api
 
+[![npm version](https://img.shields.io/npm/v/@sinoui/use-rest-item-api)](https://www.npmjs.com/package/@sinoui/use-rest-item-api)
+[![downloads](https://img.shields.io/npm/dm/@sinoui/use-rest-item-api)](https://www.npmjs.com/package/@sinoui/use-rest-item-api)
+
 与单条数据的 RESTful 风格的增删改查 API 交互的状态管理 React Hook。
 
 ## 安装
